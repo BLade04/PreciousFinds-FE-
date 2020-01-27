@@ -1,0 +1,103 @@
+
+<div class="modal-header text-center">
+    <h4 class="modal-title white-text w-100 font-weight-bold py-2">Subscribe</h4>
+    <button type="button" class="close" (click)="close()" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true" class="white-text">&times;</span>
+    </button>
+  </div>
+  <div style="float: right; padding: 5% 5% 0 0;">
+          <mat-icon style="cursor: pointer" aria-hidden="false" aria-label="" (click)="close()">
+          </mat-icon>
+        </div>
+        <div style="clear: both;"></div>
+        <div class="modal-body">
+          <div style="display: flex; flex-direction: row;">
+            <h1 style="width: 100%;">{{ category }}</h1>
+            <div style="width: 20%; text-align: right; margin-top: 2%;" *ngIf="isView">
+              <mat-icon (click)="editSupplier()" style="cursor: pointer;">edit</mat-icon>
+            </div>
+          </div>
+          </div>
+          <form [formGroup]="storeForm">
+            <div class="edit-tribes-container">
+              <div class="md-form mb-5">
+                  <i class="fas fa-user prefix grey-text"></i>
+              <input (keypress)="numberOnly($event)" class="modal-fields" matInput placeholder="Enter a supplier Id"
+                formControlName="supplierId">
+              </div>
+              <ng-container *ngIf="!isView && category == 'Add Supplier'">
+                <mat-error class="supplier-error"
+                  *ngIf="!storeForm.get('supplierId').valid && storeForm.controls['supplierId'].errors?.required && storeForm.get('supplierId').dirty">
+                  * Required field!
+                </mat-error>
+                <mat-error class="supplier-error"
+                    *ngIf="!storeForm.get('supplierId').valid && storeForm.controls['supplierId'].errors?.supplierIdAlreadyExists && storeForm.get('supplierId').dirty">
+                  supplier ID already Exist!
+                </mat-error>
+              </ng-container>
+              
+              <h5>Supplier Name<span
+                *ngIf="category == 'Add Supplier' || !storeForm.get('supplierId').valid && storeForm.controls['supplierId'].errors?.required && storeForm.get('supplierId').dirty"
+                style="color: red; font-size: 20px;"> *</span></h5>
+            <input class="modal-fields" matInput placeholder="Enter a Supplier Name" formControlName="supplierName">
+            <ng-container *ngIf="!isView && category == 'Add Supplier'">
+              <mat-error class="supplier-error"
+                *ngIf="!storeForm.get('supplierName').valid && storeForm.controls['supplierName'].errors?.supplierNameAlreadyExists && storeForm.get('supplierName').touched">
+                supplier Name already Exist!
+              </mat-error>
+              <mat-error class="supplier-error"
+              *ngIf="!storeForm.get('supplierName').valid && storeForm.controls['supplierName'].errors?.required && storeForm.get('supplierName').touched">
+              * Required field!
+            </mat-error>
+              <mat-error class="supplier-error"
+                *ngIf="!storeForm.get('supplierName').valid && storeForm.controls['supplierName'].errors?.supplierNameSpacesOnlyEntered && storeForm.get('supplierName').dirty">
+                Spaces only is not allowed!
+              </mat-error>
+              <mat-error class="supplier-error"
+                *ngIf="!storeForm.get('supplierName').valid && storeForm.controls['supplierName'].errors?.supplierNameTooShort && storeForm.get('supplierName').dirty">
+                supplier Name is too short!
+              </mat-error>
+              <mat-error class="supplier-error"
+                *ngIf="!storeForm.get('supplierName').valid && storeForm.controls['supplierName'].errors?.supplierNameAllNumbers && storeForm.get('supplierName').dirty">
+                supplier Name all numbers only is not allowed!
+              </mat-error>
+              <mat-error class="supplier-error"
+                *ngIf="!storeForm.get('supplierName').valid && storeForm.controls['supplierName'].errors?.supplierNameAllSpecialChars && storeForm.get('supplierName').dirty">
+                supplier Name all specials character is not allowed!
+              </mat-error>
+              </ng-container> 
+  
+              <h5>Contact Details<span
+                *ngIf="category == 'Add contact_number' || !storeForm.get('supplierId').valid && storeForm.controls['supplierId'].errors?.required && storeForm.get('supplierId').dirty"
+                style="color: red; font-size: 20px;"> *</span></h5>
+            <input (keypress)="numberOnly($event)" matInput placeholder="Enter a Contact Details" formControlName="contact_number">
+  
+            <h5>Email Address<span
+                *ngIf="category == 'Add email' || !storeForm.get('supplierId').valid && storeForm.controls['supplierId'].errors?.required && storeForm.get('supplierId').dirty"
+                style="color: red; font-size: 20px;"> *</span></h5>
+            <input class="modal-fields" matInput placeholder="Enter a Supplier Name" formControlName="email">
+  
+  
+              <h5>Location Address</h5>
+            <div class="sprints-descriptions-scroll">
+              <textarea formControlName="location" matInput
+                style="min-height: 150px; outline:none; resize: none;" #textarea maxlength="250"
+                class="modal-fields-addfeature extension-addfeature"
+                placeholder="Enter location of supplier"></textarea>
+              <mat-hint style="float:right; font-size: 14px">{{textarea.value?.length || 0}}/250</mat-hint>
+            </div>
+  
+              <button type="button" class="modal-button primary" color="primary" mat-raised-button (click)="onCreateSupplier()" style="margin-left: 1%; width: 100%;">
+                Confirm
+              </button>
+  
+              <button type="button" (click)="close()" class="modal-button" mat-button style="width:100%;">
+                Cancel
+              </button>
+        </div>
+        </form>
+        
+        
+        
+        
+        

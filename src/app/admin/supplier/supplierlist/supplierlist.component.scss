@@ -1,0 +1,32 @@
+
+
+.parent-container-table {
+  .header-title {
+    font-size: 1rem;
+    font-weight: bold;
+   
+    padding: 15px 40px;
+  }
+  .upper-paginator {
+    display: none;
+  }
+
+  .header-control {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+    align-items: center;
+
+    .button {
+      margin-bottom: 1.25em;
+    }
+  }
+
+  .table-container {
+    padding: 0 20px;
+  }
+
+  td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
+    font-weight: bold;
+  }
+}

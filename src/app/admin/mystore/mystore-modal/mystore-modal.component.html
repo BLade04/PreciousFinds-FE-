@@ -1,0 +1,214 @@
+<div style="float: right; padding: 5% 5% 0 0;">
+    <mat-icon style="cursor: pointer" svgIcon="close-button" aria-hidden="false" aria-label="" (click)="close()">
+    </mat-icon>
+  </div>
+  <div style="clear: both;"></div>
+  <div class="modal-body">
+    <div style="display: flex; flex-direction: row;">
+      <h1 style="width: 100%;">{{ category }}</h1>
+      <div style="width: 20%; text-align: right; margin-top: 2%;" *ngIf="isView">
+        <mat-icon (click)="editProduct()" style="cursor: pointer;">edit</mat-icon>
+      </div>
+    </div>
+    <form [formGroup]="storeForm">
+      <div class="edit-tribes-container">
+        <h5>PRODUCT ID<span
+            *ngIf="category == 'Add Product' || !storeForm.get('productID').valid && storeForm.controls['productID'].errors?.required && storeForm.get('productID').dirty"
+            style="color: red; font-size: 20px;"> *</span></h5>
+        <input (keypress)="numberOnly($event)" class="modal-fields" matInput placeholder="Enter a Product Id"
+          formControlName="productID">
+        <ng-container *ngIf="!isView && category == 'Add Product'">
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('productID').valid && storeForm.controls['productID'].errors?.required && storeForm.get('productID').touched">
+            * Required field!
+          </mat-error>
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('productID').valid && storeForm.controls['productID'].errors?.productIdAlreadyExists && storeForm.get('productID').dirty">
+            Product ID already Exist!
+          </mat-error>
+        </ng-container>
+        <ng-container *ngIf="!isView && category == 'Edit Product'">
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('productID').valid && storeForm.controls['productID'].errors?.required">
+            * Required field!
+          </mat-error>
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('productID').valid && storeForm.controls['productID'].errors?.productIdAlreadyExists">
+            Product ID already Exist!
+          </mat-error>
+        </ng-container>
+        <h5>PRODUCT NAME<span
+            *ngIf="category == 'Add Product' || !storeForm.get('productName').valid && storeForm.controls['productName'].errors?.required && storeForm.get('productName').dirty"
+            style="color: red; font-size: 20px;"> *</span></h5>
+        <input class="modal-fields" matInput placeholder="Enter a Product Name" formControlName="productName">
+        <ng-container *ngIf="!isView && category == 'Add Product'">
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('productName').valid && storeForm.controls['productName'].errors?.productNameAlreadyExists && storeForm.get('productName').touched">
+            Product Name already Exist!
+          </mat-error>
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('productName').valid && storeForm.controls['productName'].errors?.required && storeForm.get('productName').touched">
+            * Required field!
+          </mat-error>
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('productName').valid && storeForm.controls['productName'].errors?.productNameSpacesOnlyEntered && storeForm.get('productName').dirty">
+            Spaces only is not allowed!
+          </mat-error>
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('productName').valid && storeForm.controls['productName'].errors?.productNameTooShort && storeForm.get('productName').dirty">
+            Product Name is too short!
+          </mat-error>
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('productName').valid && storeForm.controls['productName'].errors?.productNameAllNumbers && storeForm.get('productName').dirty">
+            Product Name all numbers only is not allowed!
+          </mat-error>
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('productName').valid && storeForm.controls['productName'].errors?.productNameAllSpecialChars && storeForm.get('productName').dirty">
+            Product Name all specials character is not allowed!
+          </mat-error>
+        </ng-container>
+        <ng-container *ngIf="!isView && category == 'Edit Product'">
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('productName').valid && storeForm.controls['productName'].errors?.productNameAlreadyExists">
+            Product Name already Exist!
+          </mat-error>
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('productName').valid && storeForm.controls['productName'].errors?.required">
+            * Required field!
+          </mat-error>
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('productName').valid && storeForm.controls['productName'].errors?.productNameSpacesOnlyEntered">
+            Spaces only is not allowed!
+          </mat-error>
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('productName').valid && storeForm.controls['productName'].errors?.productNameTooShort">
+            Product Name is too short!
+          </mat-error>
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('productName').valid && storeForm.controls['productName'].errors?.productNameAllNumbers">
+            Product Name all numbers only is not allowed!
+          </mat-error>
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('productName').valid && storeForm.controls['productName'].errors?.productNameAllSpecialChars">
+            Product Name all specials character is not allowed!
+          </mat-error>
+        </ng-container>
+        <h5>CATEGORY</h5>
+        <mat-select formControlName="categoryId" [(value)]="selectedCategory" class="modal-fields extension-squad"
+          (selectionChange)="getSubCategory(selectedCategory)" placeholder="Select a Category">
+          <mat-option *ngFor="let record of allCategory" [value]="record.value">{{record.viewValue}}</mat-option>
+        </mat-select>
+        <ng-container *ngIf="!isView && category == 'Add Product'">
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('categoryId').valid && storeForm.controls['categoryId'].errors?.required && storeForm.get('categoryId').touched">
+            * Required field!
+          </mat-error>
+        </ng-container>
+        <ng-container *ngIf="!isView && category == 'Edit Product'">
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('categoryId').valid && storeForm.controls['categoryId'].errors?.required">
+            * Required field!
+          </mat-error>
+        </ng-container>
+        <h5>SUB CATEGORY</h5>
+        <mat-select formControlName="subCategoryId" class="modal-fields extension-squad"
+          placeholder="Select a Sub Category">
+          <mat-option *ngFor="let record of subCategory" [value]="record.value">{{record.viewValue}}</mat-option>
+        </mat-select>
+        <ng-container *ngIf="!isView && category == 'Add Product'">
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('subCategoryId').valid && storeForm.controls['subCategoryId'].errors?.required && storeForm.get('subCategoryId').touched">
+            * Required field!
+          </mat-error>
+        </ng-container>
+        <ng-container *ngIf="!isView && category == 'Edit Product'">
+          <mat-error class="product-error"
+            *ngIf="!storeForm.get('subCategoryId').valid && storeForm.controls['subCategoryId'].errors?.required">
+            * Required field!
+          </mat-error>
+        </ng-container>
+        <h5>ADD SIZES</h5>
+        <ng-container *ngIf="!isView">
+          <div style="position:relative;">
+            <mat-select formControlName="sizes" [disabled]="!storeForm.get('productID').valid"
+              [ngClass]="(!floatingSizesEmpty)?'modal-fields':'modal-fields hide-arrow'" placeholder="Select a Size"
+              #topic>
+              <mat-option *ngFor="let item of sizes" [value]="item">{{item.viewValue}}</mat-option>
+            </mat-select>
+            <span *ngIf="floatingSizesEmpty">
+              <mat-icon class="material-icons add-squad-plus-icon" (click)="onAddSize(topic)" aria-hidden="false"
+                aria-label="add">add</mat-icon>
+            </span>
+            <ng-container *ngIf="!isView && category == 'Add Product'">
+              <mat-error class="tribe-error"
+                *ngIf="!storeForm.get('sizes').valid && storeForm.controls['sizes'].errors.SizesNotAdded && storeForm.get('sizes').touched">
+                Size must be added using the plus icon
+              </mat-error>
+            </ng-container>
+            <ng-container *ngIf="!isView && category == 'Edit Product'">
+              <mat-error class="tribe-error"
+                *ngIf="!storeForm.get('sizes').valid && storeForm.controls['sizes'].errors.SizesNotAdded && storeForm.get('sizes').touched">
+                Size must be added using the plus icon
+              </mat-error>
+              <mat-error class="tribe-error"
+                *ngIf="!storeForm.get('sizes').valid && storeForm.controls['sizes'].errors.productSizeAlreadyAdded && storeForm.get('sizes').touched">
+                Size already exist in the list
+              </mat-error>
+            </ng-container>
+          </div>
+          <div *ngFor="let topic of storeForm.get('sizesArray').controls" style="display: flex;flex-direction: row"
+            class="leadAndMemberMargin added-array">
+            <input matInput disabled style="width:100%;" class="modal-fields" value="{{ topic.value?.viewValue }}">
+            <span style="margin-left:-40px; margin-top: 18px;cursor:pointer;">
+              <mat-icon class="material-icons" (click)="onRemoveSize(topic)" aria-hidden="false" aria-label="add">remove
+              </mat-icon>
+            </span>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="isView">
+          <div style="margin-top:20px;">
+            <div style="display: flex;flex-direction: row;" class="leadAndMemberMargin" *ngFor="let sizes of sizeDetails">
+              <input class="modal-fields" style="width: 100%;" matInput value="{{ sizes.viewValue }}"
+                [disabled]="fieldDisabled == true" placeholder="No Squads">
+            </div>
+          </div>
+        </ng-container>
+        <h5>PRICE<span
+            *ngIf="category == 'Add Product' || !storeForm.get('price').valid && storeForm.controls['price'].errors?.required && storeForm.get('price').dirty"
+            style="color: red; font-size: 20px;"> *</span></h5>
+        <input (keypress)="numberOnly($event)" class="modal-fields" matInput placeholder="Enter a Price "
+          formControlName="price">
+        <mat-error class="product-error"
+          *ngIf="!storeForm.get('price').valid && storeForm.controls['price'].errors?.required">
+          * Required field!
+        </mat-error>
+        <h5>DESCRIPTION</h5>
+        <div class="sprints-descriptions-scroll">
+          <textarea formControlName="productDescription" matInput style="min-height: 150px; outline:none; resize: none;"
+            #textarea maxlength="250" class="modal-fields-addfeature extension-addfeature"
+            placeholder="Enter descriptions of the feature"></textarea>
+          <mat-hint style="float:right; font-size: 14px">{{textarea.value?.length || 0}}/250</mat-hint>
+        </div>
+        <button type="button" *ngIf="!isView && category == 'Add Product'" (click)="close()" class="modal-button"
+          mat-button style="width:100%;">
+          Cancel
+        </button>
+        <button type="button" *ngIf="!isView && category == 'Edit Product'" (click)="viewProduct()" class="modal-button"
+          mat-button style="width:100%;">
+          Cancel
+        </button>
+        <button type="button" *ngIf="!isView && category == 'Edit Product'" class="modal-button primary" color="primary"
+          mat-raised-button [disabled]="!storeForm.valid" (click)="alertConfirmationSaveProduct()"
+          style="margin-left: 1%; width: 100%;">
+          Confirm
+        </button>
+        <button *ngIf="!isView && category == 'Add Product'" type="button" class="modal-button primary" mat-raised-button
+          color="primary" style="margin-left: 1%; width: 100%;" [disabled]="!storeForm.valid"
+          (click)="alertConfirmationSaveProduct()">
+          Create
+        </button>
+  
+      </div>
+  
+    </form>
+  </div>

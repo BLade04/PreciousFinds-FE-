@@ -1,0 +1,20 @@
+<div class="carousel-container">
+    <div class="header-title">Best Seller</div>
+    <mdb-carousel [isControls]="true" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'"
+      [animation]="'slide'">
+      <mdb-carousel-item *ngFor="let item of slides; let i = index">
+        <div class="col-md-4" [ngClass]="{'d-none d-md-block': cardIndex !== 0}" *ngFor="let card of item; let cardIndex = index">
+          <mdb-card class="my-1">
+            <mdb-card-img [src]="card.productImage" alt="Card image cap"></mdb-card-img>
+            <mdb-card-body>
+              <div class="price-text">{{card.productPrice}}</div>
+              <div class="item-name">{{card.productName}}</div>
+              <div class="item-description">{{card.productDescription}}</div>
+              <!-- <a href="#" mdbBtn color="primary" class="waves-light" mdbWavesEffect>{{card.buttonText}}</a> -->
+            </mdb-card-body>
+          </mdb-card>
+        </div>
+      </mdb-carousel-item>
+    </mdb-carousel>
+  </div>
+  

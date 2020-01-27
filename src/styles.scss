@@ -1,0 +1,153 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import './scss/material';
+@import './scss/utils';
+@import './scss/responsive';
+@import './scss/variables';
+@import './scss/theme';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import "./variables.scss";
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$precious-finds-angular-primary: mat-palette($mat-indigo);
+$precious-finds-angular-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$precious-finds-angular-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$precious-finds-angular-theme: mat-light-theme($precious-finds-angular-primary, $precious-finds-angular-accent, $precious-finds-angular-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($precious-finds-angular-theme);
+
+//  You can add global styles to this file, and also import other style files
+html,
+body {
+  height: 100%;
+  font-size: 18px;
+  margin: 0;
+  * {
+    font-family: "Roboto";
+  }
+
+  /* button style -start */
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $button-color;
+    box-shadow: 0px 2px 4px $brand-black;
+    padding: 5px 5px;
+    font-size: 14px;
+    font-weight: bold;
+    width: 170px;
+    height: 35px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    color: $brand-white;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &:hover {
+      background-color: $button-color-hover;
+    }
+
+    &:active {
+      background-color: $button-color-active;
+      box-shadow: 0px 3px 9px $brand-black;
+      transform: translateY(2px);
+    }
+  }
+  /* button style -end */
+
+  /* carousel style -start */
+  .carousel-control-next, .carousel-control-prev, .carousel-item-next, .carousel-item-prev, .carousel-item.active {
+    justify-content: space-evenly;
+  }
+  /* carousel style -end */
+
+  /* a router links style -start */
+  a {
+    text-decoration: none;
+    color: $brand-black;
+
+    &:hover {
+      color: $brand-black;
+    }
+  }
+  /* a router links style -end */
+
+  /* mat-table style -start */
+  .parent-container-table {
+    table.mat-table {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    tr.mat-header-row {
+      border-radius: 10px 10px 0px 0px;
+    }
+
+    td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+      min-width: 50px;
+      border-bottom-width: none;
+      border-bottom-style: none;
+    }
+
+    th {
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: $brand-white;
+      background-color: $brand-primary-color;
+
+      &.mat-header-cell:first-child {
+        border-radius: 10px 0px 0px;
+      }
+
+      &.mat-header-cell:last-child {
+        border-radius: 0px 10px 0px 0px;
+      }
+    }
+
+    tr {
+      &.mat-row:hover{
+        background-color: $brand-mid-grey;
+      }
+
+      &:nth-child(even) {
+        background-color: $brand-light-grey;
+      }
+
+      &:nth-child(odd) {
+        background-color: $brand-white;
+      }
+    }
+
+    .mat-paginator {
+      background-color: transparent;
+      margin: 0px 30px;
+    }
+  }
+  /* mat-table style -end */
+}

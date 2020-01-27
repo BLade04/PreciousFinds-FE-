@@ -1,0 +1,99 @@
+@import "../../../../variables.scss";
+
+.carousel-container {
+  background-color: $brand-white;
+  padding-bottom: 25px;
+
+  .button {
+    margin-left: 40px;
+    margin-bottom: 20px;
+  }
+
+  div.controls-top.ng-star-inserted {
+    position: absolute;
+      bottom: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      z-index: 2000;
+      color: $brand-primary-color;
+
+      .btn-floating {
+        box-shadow: 0px 3px 6px $box-shadow-color;
+        width: 30px;
+        height: 30px;
+        justify-content: flex-end;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+      }
+
+      .fa, .fas {
+        font-style: normal;
+      }
+  }
+
+  div.carousel.carousel-multi-item.multi-animation.carousel-multi-item {
+    width: 95%;
+    justify-content: center;
+    padding: 0px 33px;
+    margin: 0 15px;
+    display: inline-flex;
+  }
+
+  .carousel-indicators li {
+    background-color: $brand-primary-color;
+  }
+
+  .carousel-indicators {
+    margin-bottom: 0px;
+  }
+
+  mdb-card-img {
+    justify-content: center;
+    display: flex;
+  }
+
+  mdb-card-img img.img-fluid {
+    width: 90% !important;
+    margin: 20px 0px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px $box-shadow-color;
+  }
+
+  mdb-card-body {
+    .price-text {
+      font-size: 0.9rem;
+      text-align: right;
+    }
+
+    .item-name {
+      font-size: 0.7rem;
+      font-family: $font-family-bold;
+    }
+
+    .item-description {
+      font-size: 0.6rem;
+      min-height: 150px;
+    }
+  }
+
+  .card {
+    border-radius: 10px;
+    height: 600px;
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+  }
+
+  .header-title {
+    font-family: $font-family-bold;
+    font-size: 0.9rem;
+    color: $brand-primary-color;
+    padding-top: 20px;
+    margin-bottom: 10px;
+  }
+}
