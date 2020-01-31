@@ -4,7 +4,7 @@
 
 const apiPrefix = 'api/v1';
 // const apiDomain = 'https://delexbackendqa.azurewebsites.net';
-const apiDomain = 'http://localhost:3000';
+const apiDomain = 'https://api.precious-finds.com';
 
 // example full URL 'https://delexbackendqa.azurewebsites.net/api/v1'
 export const environment = {
